@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wedding Invitation</title>
+<meta name="theme-color" content="#f6f1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="is-intro">
+
+<!-- Reusable floral motif -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flower" viewBox="0 0 100 100">
+    <g fill="currentColor" opacity=".9">
+      <ellipse cx="50" cy="26" rx="10" ry="20"/><ellipse cx="50" cy="26" rx="10" ry="20" transform="rotate(72 50 50)"/>
+      <ellipse cx="50" cy="26" rx="10" ry="20" transform="rotate(144 50 50)"/><ellipse cx="50" cy="26" rx="10" ry="20" transform="rotate(216 50 50)"/>
+      <ellipse cx="50" cy="26" rx="10" ry="20" transform="rotate(288 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="7" fill="var(--gold)"/>
+  </symbol>
+  <symbol id="sprig" viewBox="0 0 200 40">
+    <path d="M4 20h192" stroke="currentColor" fill="none" stroke-width="1"/>
+    <g fill="currentColor"><ellipse cx="60" cy="12" rx="9" ry="4" transform="rotate(-25 60 12)"/><ellipse cx="60" cy="28" rx="9" ry="4" transform="rotate(25 60 28)"/>
+    <ellipse cx="140" cy="12" rx="9" ry="4" transform="rotate(-155 140 12)"/><ellipse cx="140" cy="28" rx="9" ry="4" transform="rotate(155 140 28)"/></g>
+    <circle cx="100" cy="20" r="5" fill="var(--gold)"/>
+  </symbol>
+</svg>
+
+<!-- ===== OPENING VIDEO (plays automatically, no buttons) ===== -->
+<section class="intro" id="intro" aria-label="Opening animation">
+  <div class="intro-bg" id="introBg"></div>
+  <video id="introVideo" muted playsinline webkit-playsinline preload="auto" autoplay></video>
+  <p class="intro-hint" id="introHint" hidden>Tap anywhere to begin</p>
+</section>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<main id="main" class="main" aria-hidden="true">
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <svg class="deco deco-tl" data-parallax="0.15"><use href="#flower"/></svg>
+    <svg class="deco deco-br" data-parallax="-0.1"><use href="#flower"/></svg>
+    <p class="fade d1">Together with their families</p>
+    <h1 class="names" aria-label=""><span id="heroBride" class="split"></span><span class="amp fade d3">&amp;</span><span id="heroGroom" class="split"></span></h1>
+    <svg class="sprig fade d4"><use href="#sprig"/></svg>
+    <p class="lead fade d5" id="heroMessage"></p>
+    <p class="date-line fade d6" id="heroDate"></p>
+    <a class="scroll-cue fade d7" href="#couple" aria-label="Scroll to explore"><span></span></a>
+  </header>
+
+  <!-- COUPLE -->
+  <section class="section couple" id="couple">
+    <h2 class="reveal title">The Bride &amp; Groom</h2>
+    <div class="couple-grid">
+      <article class="person reveal slide-l">
+        <div class="frame"><img id="brideImg" alt="Bride" loading="lazy" width="800" height="1000"></div>
+        <h3 data-bind="brideName"></h3><svg class="sprig sm"><use href="#sprig"/></svg>
+        <p id="brideIntro"></p>
+      </article>
+      <article class="person reveal slide-r">
+        <div class="frame"><img id="groomImg" alt="Groom" loading="lazy" width="800" height="1000"></div>
+        <h3 data-bind="groomName"></h3><svg class="sprig sm"><use href="#sprig"/></svg>
+        <p id="groomIntro"></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- DATE FLIP CARD + COUNTDOWN -->
+  <section class="section date" id="date">
+    <h2 class="reveal title">Save the Date</h2>
+    <button class="flip reveal" id="flipCard" type="button" aria-pressed="false" aria-label="Tap to reveal the wedding date">
+      <span class="flip-inner">
+        <span class="face front"><svg class="fl"><use href="#flower"/></svg><span class="script">Our Special Day</span><small>Tap to reveal</small></span>
+        <span class="face back">
+          <small id="cardWeekday"></small>
+          <span class="big" id="cardDay"></span>
+          <span class="script" id="cardMonth"></span>
+          <small id="cardYear"></small>
+          <small class="time" id="cardTime"></small>
+        </span>
+      </span>
+    </button>
+    <div class="count reveal" id="countdown" role="timer" aria-live="off">
+      <div class="cd"><b id="cdD">00</b><span>Days</span></div>
+      <div class="cd"><b id="cdH">00</b><span>Hours</span></div>
+      <div class="cd"><b id="cdM">00</b><span>Minutes</span></div>
+      <div class="cd"><b id="cdS">00</b><span>Seconds</span></div>
+    </div>
+    <p class="done" id="countDone" hidden></p>
+  </section>
+
+  <!-- VENUE -->
+  <section class="section venue" id="venue">
+    <h2 class="reveal title">The Venue</h2>
+    <div class="venue-grid">
+      <div class="venue-img reveal scale"><img id="venueImg" alt="Wedding venue" loading="lazy" width="1400" height="900"></div>
+      <div class="venue-info reveal">
+        <h3 id="venueName"></h3>
+        <p id="venueAddress"></p>
+        <p class="when" id="venueWhen"></p>
+        <a class="btn" id="directions" target="_blank" rel="noopener">Get Directions</a>
+      </div>
+    </div>
+    <div class="map reveal"><iframe id="mapFrame" title="Venue map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="section schedule" id="schedule">
+    <h2 class="reveal title">Order of the Day</h2>
+    <ol class="timeline" id="timeline"><span class="line"><i id="lineFill"></i></span></ol>
+  </section>
+
+  <!-- ROMANTIC MESSAGE -->
+  <section class="section love" id="love">
+    <svg class="deco deco-l" data-parallax="0.1"><use href="#flower"/></svg>
+    <svg class="deco deco-r" data-parallax="-0.1"><use href="#flower"/></svg>
+    <p class="quote" id="loveMessage"></p>
+    <p class="reveal sig" id="loveSig"></p>
+  </section>
+
+  <!-- THANK YOU -->
+  <footer class="section thanks" id="thanks">
+    <svg class="float f1"><use href="#flower"/></svg><svg class="float f2"><use href="#flower"/></svg><svg class="float f3"><use href="#flower"/></svg>
+    <h2 class="reveal title big-title">Thank You</h2>
+    <p class="reveal lead" id="thanksMessage"></p>
+    <svg class="sprig reveal"><use href="#sprig"/></svg>
+    <p class="reveal names-end" id="thanksNames"></p>
+  </footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
